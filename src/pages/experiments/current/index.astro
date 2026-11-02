@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ExperimentList from '../../../components/ExperimentList.astro';
+---
+
+<BaseLayout title="Current experiments" description="Technical experiments currently in progress.">
+  <h1>Current experiments</h1>
+  <p><a href="/experiments/">All experiments</a> · <a href="/experiments/past/">Past experiments</a></p>
+  <ExperimentList status="current" />
+</BaseLayout>

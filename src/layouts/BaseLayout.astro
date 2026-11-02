@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const links = [
+  ['/', 'Home'],
+  ['/blog/', 'Blog'],
+  ['/experiments/', 'Experiments'],
+  ['/adventures/', 'Adventures'],
+  ['/resume/', 'Resume'],
+];
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title === 'Chain of Thoughts' ? title : `${title} | Chain of Thoughts`}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="site-name" href="/">Chain of Thoughts</a>
+      <nav aria-label="Main navigation">
+        <ul>
+          {links.map(([href, label]) => (
+            <li><a href={href} aria-current={pathname === href ? 'page' : undefined}>{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer"><p>Chain of Thoughts — a personal space for thinking, making, and exploring.</p></footer>
+  </body>
+</html>

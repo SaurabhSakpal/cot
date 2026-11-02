@@ -1,16 +1,14 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Chain of Thoughts" description="A personal space for software engineering, technical experiments, landscape photography, and learning.">
+  <h1>Chain of Thoughts</h1>
+  <p>A personal space for software engineering thoughts, technical experiments, landscape photography, and exploration.</p>
+  <ul>
+    <li><a href="/blog/">Blog</a> — thoughts and notes on engineering and learning.</li>
+    <li><a href="/experiments/">Experiments</a> — technical explorations, in progress and completed.</li>
+    <li><a href="/adventures/">Adventures</a> — landscape photography and personal exploration.</li>
+  </ul>
+  <p>Start with <a href="/blog/hello-world/">Hello, World.</a></p>
+</BaseLayout>

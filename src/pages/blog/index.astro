@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryList from '../../components/EntryList.astro';
+import { newestFirst } from '../../lib/content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(newestFirst);
+---
+
+<BaseLayout title="Blog" description="Thoughts on software engineering, exploration, and learning.">
+  <h1>Blog</h1>
+  <p>Thoughts on software engineering and things learned along the way.</p>
+  {posts.length > 0 ? <EntryList entries={posts} /> : <p class="empty-state">No articles published yet. New thoughts will appear here.</p>}
+</BaseLayout>

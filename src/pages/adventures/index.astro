@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryList from '../../components/EntryList.astro';
+import { newestFirst } from '../../lib/content';
+
+const adventures = (await getCollection('adventures', ({ data }) => !data.draft)).sort(newestFirst);
+---
+
+<BaseLayout title="Adventures" description="Landscape photography, personal exploration, and notes from outside.">
+  <h1>Adventures</h1>
+  <p>Landscape photography and notes from personal exploration.</p>
+  {adventures.length > 0 ? <EntryList entries={adventures} /> : (
+    <p class="empty-state">No adventures published yet. Photographs and notes from future explorations will appear here.</p>
+  )}
+</BaseLayout>

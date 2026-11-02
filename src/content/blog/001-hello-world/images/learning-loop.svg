@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="260" viewBox="0 0 800 260" role="img" aria-labelledby="title desc">
+  <title id="title">Temporary learning loop diagram</title>
+  <desc id="desc">Curiosity leads to experiments, then notes, then back to curiosity. This is a placeholder, not a photograph.</desc>
+  <rect width="800" height="260" fill="#f5f5f5"/>
+  <g fill="#fff" stroke="#525252" stroke-width="2">
+    <rect x="40" y="80" width="200" height="70" rx="6"/>
+    <rect x="300" y="80" width="200" height="70" rx="6"/>
+    <rect x="560" y="80" width="200" height="70" rx="6"/>
+    <path d="M240 115h60m-12-8 12 8-12 8M500 115h60m-12-8 12 8-12 8M660 150v40H140v-40m-8 12 8-12 8 12" fill="none"/>
+  </g>
+  <g fill="#171717" font-family="sans-serif" text-anchor="middle">
+    <text x="400" y="38" font-size="18">TEMPORARY PLACEHOLDER — NOT A PHOTOGRAPH</text>
+    <text x="140" y="122" font-size="22">Curiosity</text>
+    <text x="400" y="122" font-size="22">Experiments</text>
+    <text x="660" y="122" font-size="22">Notes</text>
+    <text x="400" y="234" font-size="16">Keep exploring. Keep learning.</text>
+  </g>
+</svg>
