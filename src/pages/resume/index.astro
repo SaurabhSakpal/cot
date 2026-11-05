@@ -1,8 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+// Preserve existing bookmarks while the section moves to About.
+return Astro.redirect('/about/', 301);
 ---
-
-<BaseLayout title="Resume" description="Resume information for the author of Chain of Thoughts.">
-  <h1>Resume</h1>
-  <p>A resume has not been published here yet.</p>
-</BaseLayout>

@@ -12,6 +12,7 @@ export default defineConfig({
   prerenderConflictBehavior: "error",
   site: "https://www.saurabhsakpal.com",
   integrations: [mdx()],
+  markdown: { shikiConfig: { theme: 'github-dark' } },
 
   vite: {
     plugins: [tailwindcss()],

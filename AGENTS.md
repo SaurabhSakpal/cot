@@ -25,7 +25,7 @@ Consult these guides before working on related tasks:
 
 - Astro 7 with strict TypeScript, the existing MDX integration, and Tailwind CSS 4 through its Vite plugin. Preserve dependency versions and working integrations. Import Zod 4 from `astro/zod`.
 - This is a static, local-file-authored personal website. No CMS, database, client router, or UI framework is required.
-- Visual identity is deferred. Keep layouts readable and accessible. Do not invent projects, travel, photographs, or resume details.
+- The initial dark theme is shared across pages. Keep layouts readable and accessible. Do not invent projects, travel, photographs, or resume details.
 - Hosting, domains, CI, analytics, authentication, comments, and likes are outside Phase 2A.
 
 ## Repository structure
@@ -76,11 +76,19 @@ Empty content directories are tracked with `.gitkeep`; these are not collection 
 
 Use standard Markdown syntax with paths relative to the entry for colocated assets under `src/content/`. Astro resolves and processes these at build time. Do not use raw `<img src="./images/...">` for images under `src/`. MDX can import `Image` from `astro:assets` for extra controls. The Hello World SVG is explicitly a temporary diagram, not a photograph.
 
+## Article styling and authoring
+
+- Shared UI fonts, dark colors, layout, and image/code radius are in `src/styles/global.css`. Article font roles and sizes are in `src/styles/article.css`: Newsreader titles, Source Serif 4 Regular body, and Cormorant Garamond headings/quotations. Keep table typography explicitly Inter, independent of the article body font.
+- Blog and experiments share the reading layout with a left table of contents and numbered right-margin notes on wide screens. Narrow screens show notes at the article end.
+- Use Markdown footnotes (`[^name]` and `[^name]: text`) for supporting notes/references. Use a `figure.quote-card` for labeled quotes and a `figure.wide-media` around a standard Markdown image for wider diagrams. Keep blank lines around Markdown inside HTML wrappers. See AUTHOR_GUIDE.md for complete examples.
+- The shared menu uses Travel for `/adventures/` and About for `/about/`. `/resume/` is a compatibility redirect, not a second content page.
+- Keep article headings and sticky navigation clear of the persistent header using the shared header-height offset.
+
 ## Static generation and verification
 
 - Keep `output: 'static'`, directory build output, and trailing-slash URLs. All `[slug].astro` templates must use `getStaticPaths()` and exclude drafts before generating paths. Render with `render(entry)` from `astro:content`.
 - Run `npm run build` after content, schema, routing, layout, or configuration changes; fix failures before handing off. The build validates collection data but does not replace a full TypeScript/Astro diagnostic check.
-- Verify `dist/index.html`, `dist/blog/index.html`, `dist/blog/hello-world/index.html`, all three experiment listing pages, `dist/adventures/index.html`, and `dist/resume/index.html`.
+- Verify `dist/index.html`, `dist/blog/index.html`, `dist/blog/hello-world/index.html`, all three experiment listing pages, `dist/adventures/index.html`, `dist/about/index.html`, and the compatibility redirect at `dist/resume/index.html`.
 - Verify images referenced in generated HTML exist in `dist/`, retain alt text, and render. Check navigation and empty states. Empty collections emit expected Astro warnings but must build successfully; do not add fake entries to silence warnings.
 - For publishing-rule changes, verify drafts have no listing links or production article routes and that status changes and directory moves preserve experiment URLs. Remove temporary validation entries before the final build.
 - Keep `CHECKLIST.md` current. Do not commit automatically; the user reviews first.

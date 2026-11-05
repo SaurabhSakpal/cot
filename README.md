@@ -1,8 +1,10 @@
 # Chain of Thoughts
 
-A personal static website for software engineering thoughts, technical experiments, landscape photography, and exploration. Phase 2A establishes content architecture with simple, accessible layouts. The full visual identity comes later.
+A personal static website for software engineering thoughts, technical experiments, landscape photography, and exploration. Content is authored locally, with a shared dark theme and a reading layout for blog posts and experiments.
 
 Built with Astro 7.4.4, strict TypeScript, MDX, and Tailwind CSS 4. Content lives in Git as Markdown and local assets. No CMS or database is needed.
+
+For copyable examples of headings, quotes, references, code, links, images, wide images, and tables, keep the [Author Guide](AUTHOR_GUIDE.md) open while writing.
 
 ## Development
 
@@ -86,6 +88,14 @@ cover:
 
 The cover renders above the body. Body images work without a cover. The introductory article's SVG is a labeled temporary diagram, not a real photograph.
 
+### Formatting articles
+
+See the permanent [Author Guide](AUTHOR_GUIDE.md) for copyable examples of every supported article element, including attributed quote cards, numbered references, wide images, and fenced code blocks. The guide also covers draft previewing and the generated table of contents.
+
+### Shared styling
+
+`src/styles/global.css` owns the shared UI font, colors, layout, article width, and media radius. `src/styles/article.css` defines article typography: Newsreader for titles, Source Serif 4 Regular for body text, and Cormorant Garamond for headings and quotations. Table headers and cells explicitly use Inter at the original compact size and line spacing; navigation, metadata, and captions also use Inter. Code retains its monospace font. All four font families are self-hosted under `public/fonts/` with their SIL Open Font Licenses. Blog/experiment article details live in `ArticleLayout`, `TableOfContents`, and the small `src/scripts/article.ts` enhancement script; no UI framework is required. The shared header links Travel to the existing `/adventures/` routes and About to `/about/`.
+
 ### Drafts
 
 Set `draft: true` to exclude an entry from every listing and generated article route in both development and production. To preview a draft, temporarily set it to `false` locally, then restore `true` before committing if it should remain unpublished. Drafts still need valid metadata because the loader validates every entry.
@@ -143,14 +153,15 @@ Use the same `![alt](./images/filename.jpg)` syntax for local photographs. The p
 | `/experiments/[slug]/` | Experiment at its stable slug |
 | `/adventures/` | Adventures, newest first |
 | `/adventures/[slug]/` | Published adventure |
-| `/resume/` | Empty state until a real resume is provided |
+| `/about/` | About information, unpublished until supplied |
+| `/resume/` | Compatibility redirect to `/about/` (HTML redirect in static output) |
 
 The build is explicitly static with trailing-slash URLs and directory output. Dynamic templates use `getStaticPaths()` and render content at build time. Empty collections display useful empty states; their detail templates generate zero pages until entries exist.
 
 After changing content or code:
 
 - Run `npm run build` and fix schema or compilation errors. The build validates content schemas; it is not a full TypeScript/Astro diagnostic check.
-- Verify the eight initial HTML files: `dist/index.html`, `dist/blog/index.html`, `dist/blog/hello-world/index.html`, `dist/experiments/index.html`, `dist/experiments/current/index.html`, `dist/experiments/past/index.html`, `dist/adventures/index.html`, and `dist/resume/index.html`.
+- Verify the core HTML files: `dist/index.html`, `dist/blog/index.html`, `dist/blog/hello-world/index.html`, `dist/experiments/index.html`, `dist/experiments/current/index.html`, `dist/experiments/past/index.html`, `dist/adventures/index.html`, `dist/about/index.html`, and the redirect at `dist/resume/index.html`.
 - Preview `/blog/hello-world/`, confirm the placeholder image and alt text, and check that the generated image exists under `dist/_astro/`.
 - Check navigation, empty states, and draft exclusion. When changing collection logic, check MDX, status filtering, and stable URLs after moving experiments.
 - Expect harmless Astro warnings while experiments/adventures are intentionally empty.

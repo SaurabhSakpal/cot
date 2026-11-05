@@ -1,0 +1,136 @@
+/* Shared article typography. Colors and layout remain in global.css. */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/fonts/Newsreader.ttf') format('truetype');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/SourceSerif4.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/SourceSerif4-Italic.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/CormorantGaramond.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/CormorantGaramond-Italic.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+.article-shell {
+  /* Fluid type sizes from 320px to 1200px, capped on larger screens. */
+  --article-fluid: clamp(0px, calc((100vw - 20rem) / 880), 1px);
+  --article-body: calc(1.25rem + 2 * var(--article-fluid));
+  --article-small: calc(1rem + 0.5 * var(--article-fluid));
+  --article-label: calc(0.90625rem + 0.5 * var(--article-fluid));
+  --article-title-size: calc(2.929375rem + 9.13 * var(--article-fluid));
+  --article-h2: calc(2.44125rem + 4.94 * var(--article-fluid));
+  --article-h3: calc((1.875rem + 6 * var(--article-fluid)) / 1.1);
+  --article-body-font: 'Source Serif 4', Georgia, serif;
+  --article-heading-font: 'Cormorant Garamond', Georgia, serif;
+  --article-title-font: 'Newsreader', Georgia, serif;
+  --article-ui-font: var(--font-body);
+}
+.article-shell .article-header h1 {
+  font-family: var(--article-title-font);
+  font-size: var(--article-title-size);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: normal;
+}
+.article-shell .article-header > p:not(.metadata) {
+  font-family: var(--article-body-font);
+  font-size: calc(1.5625rem + 3.6 * var(--article-fluid));
+  font-weight: 400;
+  line-height: 1.4;
+}
+.article-shell .article-header .metadata {
+  font-family: var(--article-ui-font);
+  font-size: var(--article-label);
+}
+.article-shell .prose {
+  font-family: var(--article-body-font);
+  font-size: var(--article-body);
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+/* Keep the regular body face in its sturdier text optical size. */
+.article-shell .prose > p,
+.article-shell .prose li,
+.article-shell .prose blockquote {
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 14;
+}
+.article-shell .prose > p { line-height: 2; }
+.article-shell .prose ul, .article-shell .prose ol { line-height: 1.6; }
+.article-shell .prose > h2 {
+  font-family: var(--article-heading-font);
+  font-size: var(--article-h2);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+.article-shell .prose > h3 {
+  font-family: var(--article-heading-font);
+  font-size: var(--article-h3);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+.article-shell .prose > h4 {
+  font-family: var(--article-heading-font);
+  font-size: var(--article-body);
+  font-weight: 700;
+  line-height: 1.4;
+}
+.article-shell .prose blockquote, .article-shell .prose .quote-card blockquote {
+  font-family: var(--article-heading-font);
+  font-size: var(--article-body);
+  font-weight: 400;
+  font-variation-settings: normal;
+  line-height: 1.6;
+}
+.article-shell .prose .quote-label {
+  font-family: var(--article-ui-font);
+  font-size: var(--article-label);
+}
+.article-shell .prose .quote-source, .article-shell .prose .wide-media figcaption {
+  font-family: var(--article-ui-font);
+  font-size: var(--article-small);
+}
+.article-shell .prose [data-footnotes], .article-shell .prose.margin-notes [data-footnotes] > ol > li {
+  font-family: var(--article-body-font);
+  font-size: var(--article-small);
+  line-height: 1.4;
+}
+/* Retain the existing code font/size and TOC/menu typography. */
+.article-shell .prose pre { font-size: 1rem; }
+
+@media (max-width: 767px) {
+  .article-shell .article-header h1 {
+    font-size: calc(2.44125rem + 4.94 * var(--article-fluid));
+  }
+  .article-shell .article-header > p:not(.metadata) { font-size: var(--article-body); }
+  .article-shell .prose > p { line-height: 1.6; }
+}
+
+.article-shell .prose > h5, .article-shell .prose > h6 {
+  font-family: var(--article-heading-font);
+}

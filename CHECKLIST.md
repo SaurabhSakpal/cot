@@ -34,6 +34,22 @@
 - [x] Render and visually inspect the generated placeholder SVG.
 - [x] Review final diff without committing.
 
+## Blog and experiment styling
+
+- [x] Add shared dark colors, self-hosted Inter, readable heading levels, and one image/code corner radius.
+- [x] Finalize Newsreader titles, Source Serif 4 Regular body, Cormorant Garamond headings/quotes, and original Inter table typography.
+- [x] Archive temporary typography comparison routes/styles/fonts outside the repository; retain chosen fonts with licenses.
+- [x] Add persistent glass header with Blog, Experiments, Travel, and About navigation.
+- [x] Rename Resume to About and retain a compatibility redirect for the old URL.
+- [x] Add article table of contents with desktop sticky placement and mobile disclosure.
+- [x] Add quote cards, wider Markdown images, responsive notes, code line numbers, and copy controls.
+- [x] Add permanent AUTHOR_GUIDE.md with copyable Markdown/HTML examples and link it from README.md.
+- [x] Build successfully; verify core HTML, local images, anchor targets, About redirect, MDX, and draft exclusion.
+- [x] Pass full Astro diagnostics with zero errors/warnings/hints, strictly check the article script, and test TOC/note/copy behavior in a DOM harness.
+- [x] Complete desktop design feedback and final typography selection.
+- [ ] Complete visual review on a mobile browser; simulated DOM checks passed, but no browser was available during implementation.
+- [x] Remove inventoried temporary preview artifacts, preserve user test images outside the repository, and audit the final merge diff.
+
 ## Later phases
 
 - [ ] Implement full visual identity.
