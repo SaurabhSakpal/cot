@@ -60,6 +60,7 @@
 - [x] Retain reduced-motion support, hidden/offscreen suspension, canvas fallback, protected text, and the capped pixel ratio.
 - [x] Pass the final build, full Astro diagnostics, route/link/image checks, and mesh interaction/lifecycle verification.
 - [x] Preserve the V7 alternative on `feature/homepage-v7`.
+- [x] Use the supplied COT SVG as the shared browser favicon, with a matching multi-size ICO fallback replacing the Astro icon.
 
 ## Later phases
 
