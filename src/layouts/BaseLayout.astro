@@ -4,9 +4,10 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  landing?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, landing = false } = Astro.props;
 const links = [
   ['/blog/', 'Blog'],
   ['/experiments/', 'Experiments'],
@@ -23,10 +24,11 @@ const pathname = Astro.url.pathname;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SpaceGrotesk.ttf" as="font" type="font/ttf" crossorigin />
     <meta name="description" content={description} />
     <title>{title === 'Chain of Thoughts' ? title : `${title} | Chain of Thoughts`}</title>
   </head>
-  <body>
+  <body class:list={[{ 'mesh-home': landing }]}>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="header-inner">
@@ -40,7 +42,7 @@ const pathname = Astro.url.pathname;
       </nav>
       </div>
     </header>
-    <main id="main" tabindex="-1"><slot /></main>
+    <main id="main" tabindex="-1" class:list={[{ 'mesh-main': landing }]}><slot /></main>
     <footer class="site-footer"><p>Chain of Thoughts — a personal space for thinking, making, and exploring.</p></footer>
     <script>
       const header = document.querySelector<HTMLElement>('.site-header');

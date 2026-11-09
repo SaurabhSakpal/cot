@@ -94,7 +94,15 @@ See the permanent [Author Guide](AUTHOR_GUIDE.md) for copyable examples of every
 
 ### Shared styling
 
-`src/styles/global.css` owns the shared UI font, colors, layout, article width, and media radius. `src/styles/article.css` defines article typography: Newsreader for titles, Source Serif 4 Regular for body text, and Cormorant Garamond for headings and quotations. Table headers and cells explicitly use Inter at the original compact size and line spacing; navigation, metadata, and captions also use Inter. Code retains its monospace font. All four font families are self-hosted under `public/fonts/` with their SIL Open Font Licenses. Blog/experiment article details live in `ArticleLayout`, `TableOfContents`, and the small `src/scripts/article.ts` enhancement script; no UI framework is required. The shared header links Travel to the existing `/adventures/` routes and About to `/about/`.
+`src/styles/global.css` owns the shared UI font, colors, layout, article width, and media radius. `src/styles/article.css` defines article typography: Newsreader for titles, Source Serif 4 Regular for body text, and Cormorant Garamond for headings and quotations. Table headers and cells explicitly use Inter at the original compact size and line spacing; navigation, metadata, and captions also use Inter. Code retains its monospace font. All five font families are self-hosted under `public/fonts/` with their SIL Open Font Licenses. Blog/experiment article details live in `ArticleLayout`, `TableOfContents`, and the small `src/scripts/article.ts` enhancement script; no UI framework is required. The shared header links Travel to the existing `/adventures/` routes and About to `/about/`.
+
+### Homepage
+
+The homepage uses a dotted near-black `#0a0a0b` background, a large Newsreader title, and a stacked introduction. The welcome greeting has dark text on a lime inline highlight that follows wrapped lines. Its three paragraphs use Source Serif 4 and the full introduction width. Latest writing comes from published blog entries, with stable content IDs and UTC dates.
+
+A custom HTML canvas mesh provides the decoration without a graphics library. Its 642 vertices and 1,920 edges form a slowly turning, breathing globe with pointer deformation. Nearby front-facing nodes reveal up to three neutral-grey keywords from 120 single-word computer science and finance terms. Labels avoid the introduction and other labels, then fade when the pointer leaves. Reduced motion keeps the globe static while allowing immediate keyword reveals; animation pauses in hidden tabs and when offscreen. The decoration does not capture clicks or text selection, and the complete page remains usable if canvas is unavailable.
+
+`src/styles/home.css` defines the homepage layout. `ThoughtMesh.astro`, `src/scripts/thought-mesh.ts`, `src/lib/mesh.ts`, and `src/lib/mesh-keywords.ts` implement the mesh. The shared header uses an uppercase Space Grotesk identity, lime dot and hover/active states, and an outlined About link on every page. Space Grotesk is self-hosted with its SIL Open Font License alongside the existing fonts. Colors and typography tokens live in `global.css`; article headings and quotations retain Cormorant Garamond, and UI/table text retains Inter.
 
 ### Drafts
 

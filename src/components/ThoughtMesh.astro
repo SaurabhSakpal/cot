@@ -1,0 +1,19 @@
+<canvas class="thought-mesh" data-thought-mesh aria-hidden="true"></canvas>
+
+<script>
+  import '../scripts/thought-mesh';
+</script>
+
+<style>
+  .thought-mesh {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.85;
+    mask-image: linear-gradient(90deg, #0003, #0007 48%, #000);
+  }
+</style>

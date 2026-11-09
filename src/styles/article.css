@@ -1,19 +1,5 @@
 /* Shared article typography. Colors and layout remain in global.css. */
 @font-face {
-  font-family: 'Newsreader';
-  src: url('/fonts/Newsreader.ttf') format('truetype');
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Source Serif 4';
-  src: url('/fonts/SourceSerif4.ttf') format('truetype');
-  font-weight: 200 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: 'Source Serif 4';
   src: url('/fonts/SourceSerif4-Italic.ttf') format('truetype');
   font-weight: 200 900;
@@ -43,9 +29,9 @@
   --article-title-size: calc(2.929375rem + 9.13 * var(--article-fluid));
   --article-h2: calc(2.44125rem + 4.94 * var(--article-fluid));
   --article-h3: calc((1.875rem + 6 * var(--article-fluid)) / 1.1);
-  --article-body-font: 'Source Serif 4', Georgia, serif;
+  --article-body-font: var(--font-reading);
   --article-heading-font: 'Cormorant Garamond', Georgia, serif;
-  --article-title-font: 'Newsreader', Georgia, serif;
+  --article-title-font: var(--font-title);
   --article-ui-font: var(--font-body);
 }
 .article-shell .article-header h1 {

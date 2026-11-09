@@ -50,6 +50,17 @@
 - [ ] Complete visual review on a mobile browser; simulated DOM checks passed, but no browser was available during implementation.
 - [x] Remove inventoried temporary preview artifacts, preserve user test images outside the repository, and audit the final merge diff.
 
+## Approved homepage
+
+- [x] Adopt the user-approved mesh homepage with a stacked introduction, revised three-paragraph copy, and lime welcome highlight.
+- [x] Share serif font roles, the near-black background, and the consistent lime-accented header across pages.
+- [x] Self-host the brand font with its license; preserve dependency versions, integrations, content, and publishing rules.
+- [x] Render published writing from Content Layer entries with stable IDs and UTC dates.
+- [x] Add the 642-vertex, 1,920-edge globe and 120 single-word CS/finance terms, revealing up to three neutral-grey labels on hover.
+- [x] Retain reduced-motion support, hidden/offscreen suspension, canvas fallback, protected text, and the capped pixel ratio.
+- [x] Pass the final build, full Astro diagnostics, route/link/image checks, and mesh interaction/lifecycle verification.
+- [x] Preserve the V7 alternative on `feature/homepage-v7`.
+
 ## Later phases
 
 - [ ] Implement full visual identity.

@@ -1,14 +1,49 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ThoughtMesh from '../components/ThoughtMesh.astro';
+import { newestFirst, formatDate } from '../lib/content';
+import '../styles/home.css';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(newestFirst).slice(0, 3);
 ---
 
-<BaseLayout title="Chain of Thoughts" description="A personal space for software engineering, technical experiments, landscape photography, and learning.">
-  <h1>Chain of Thoughts</h1>
-  <p>A personal space for software engineering thoughts, technical experiments, landscape photography, and exploration.</p>
-  <ul>
-    <li><a href="/blog/">Blog</a> — thoughts and notes on engineering and learning.</li>
-    <li><a href="/experiments/">Experiments</a> — technical explorations, in progress and completed.</li>
-    <li><a href="/adventures/">Adventures</a> — landscape photography and personal exploration.</li>
-  </ul>
-  <p>Start with <a href="/blog/hello-world/">Hello, World.</a></p>
+<BaseLayout landing title="Chain of Thoughts" description="Saurabh’s personal blog about software engineering, experiments, and the connections between ideas.">
+  <section class="mesh-hero" aria-labelledby="home-title">
+    <ThoughtMesh />
+    <div class="hero-space-top" aria-hidden="true"></div>
+    <div class="hero-content home-container">
+      <h1 id="home-title"><span>Chain of</span> <span>Thoughts</span></h1>
+      <section class="home-introduction" aria-label="Introduction">
+        <p class="home-greeting"><mark>Hi, I’m Saurabh, and welcome to my blog.</mark></p>
+        <div class="home-introduction-copy">
+          <p>This is my little corner of the internet. Here, you'll find articles about things I'm passionate about, along with experiments I've run or am currently running.</p>
+          <p>I believe ideas are rarely complete when they're first formed. They evolve as we spend more time thinking, experimenting, and tinkering with them. My articles are no different. Each one has a starting point, followed by iterations that capture how my thoughts and understanding evolve over time.</p>
+          <p>I'm writing primarily for myself, but if something here sparks your curiosity, even better.</p>
+        </div>
+      </section>
+      <a class="hero-explore" href="#writing"><span aria-hidden="true"></span>Scroll to explore writing and experiments</a>
+    </div>
+    <div class="hero-space-bottom" aria-hidden="true"></div>
+  </section>
+
+  <section class="home-writing home-container" id="writing" aria-labelledby="writing-title">
+    <div class="writing-heading">
+      <h2 id="writing-title">Latest writing</h2>
+      <a href="/blog/">All articles <span aria-hidden="true">↗</span></a>
+    </div>
+    {posts.length ? <ol class="writing-list">
+      {posts.map((post, index) => <li>
+        <a href={`/blog/${post.id}/`}>
+          <span class="writing-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <div>
+            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </div>
+          <span class="writing-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>)}
+    </ol> : <p class="writing-empty">New thoughts will appear here.</p>}
+  </section>
 </BaseLayout>
