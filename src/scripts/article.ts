@@ -85,11 +85,12 @@ if (article && prose) {
   }
 
   // Keep the same semantic footnotes and return links in both layouts.
-  // On roomy screens only, position them beside their first reference.
+  // From tablet width up, position them beside their first reference.
   const notes = Array.from(prose.querySelectorAll<HTMLElement>('[data-footnotes] > ol > li'));
-  const media = window.matchMedia('(min-width: 90rem)');
+  const media = window.matchMedia('(min-width: 48rem)');
   const positionNotes = () => {
     prose.classList.remove('margin-notes');
+    prose.style.removeProperty('min-height');
     if (!media.matches || !article.classList.contains('reading-layout')) return;
     prose.classList.add('margin-notes');
     const top = prose.getBoundingClientRect().top;

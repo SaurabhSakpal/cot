@@ -62,6 +62,28 @@
 - [x] Preserve the V7 alternative on `feature/homepage-v7`.
 - [x] Use the supplied COT SVG as the shared browser favicon, with a matching multi-size ICO fallback replacing the Astro icon.
 
+## Temporary article playground
+
+- [x] Add `/blog/article-playground/` with all documented article elements, heading levels H2–H6, and copied Hello World assets.
+- [x] Label the entry as temporary and document that `draft: false` makes it visible in both local preview and production builds.
+- [x] Leave revisions for a later discussion; preserve existing content, schemas, layouts, and dependencies.
+- [x] Run `npm run build`; verify all ten generated pages, navigation, local links, image files/alt text, footnote anchors, empty states, and the resume redirect.
+- [x] Show notes in the right margin from 768px up, reserve a responsive notes column below the full desktop layout, and retain endnotes on phones.
+- [x] Rebuild and verify note positioning, wide-image avoidance, and resize cleanup in a DOM harness at 390, 767, 768, 1024, 1366, 1440, and 1920px.
+- [x] Visually review the user-supplied desktop and phone screenshots of the playground.
+- [x] Remove the playground entry and its copied assets after screenshot review; retain the guide examples and documentation screenshots.
+- [x] Rebuild after removal; verify all nine remaining pages, Hello World assets, empty states, screenshot links, and absence of playground routes/listing links.
+
+## Illustrated author guide
+
+- [x] Use playground examples throughout AUTHOR_GUIDE.md with screenshot references immediately following the source examples.
+- [x] Embed screenshot links named `ag_img_01.png` through `ag_img_16.png` and add a capture checklist for `docs/images/author-guide/`.
+- [x] Match every article source example to the playground verbatim, including full heading text, reference paragraphs, endnote definitions, output examples, and table rows.
+- [x] Confirm all sixteen user-captured PNGs are in `docs/images/author-guide/` and every embedded screenshot link resolves.
+- [x] Visually inspect all sixteen images against the playground examples and record crop adjustments in AUTHOR_GUIDE.md.
+- [x] Recheck updated captures `ag_img_01.png`, `ag_img_02.png`, `ag_img_04.png`, and `ag_img_14.png`; they now demonstrate their intended examples.
+- [x] Verify the corrected `ag_img_12.png` shows phone-width plain output and long JSON; all sixteen screenshot examples now pass visual review.
+
 ## Later phases
 
 - [ ] Implement full visual identity.
