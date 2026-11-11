@@ -17,7 +17,7 @@ const tags = 'tags' in entry.data ? entry.data.tags : [];
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
-  <article class:list={['article-shell', { 'reading-layout': readingLayout }]}>
+  <article class:list={['article-shell', { 'reading-layout': readingLayout, 'blog-article': entry.collection === 'blog' }]}>
     <header class="article-header">
       {entry.collection !== 'blog' && (
         <p><a href={`/${entry.collection}/`}>Back to {entry.collection}</a></p>
@@ -30,7 +30,7 @@ const tags = 'tags' in entry.data ? entry.data.tags : [];
       )}
       {entry.collection === 'experiments' && (
         <>
-          <p class="metadata">Status: {entry.data.status === 'current' ? 'Current' : 'Completed'}</p>
+          <p class="metadata experiment-status">Status: {entry.data.status === 'current' ? 'Current' : 'Completed'}</p>
           {entry.data.completedDate && <p class="metadata">Completed <time datetime={entry.data.completedDate.toISOString()}>{formatDate(entry.data.completedDate)}</time></p>}
         </>
       )}

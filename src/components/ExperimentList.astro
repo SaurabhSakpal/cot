@@ -11,7 +11,7 @@ const experiments = (await getCollection('experiments', ({ data }) =>
 ---
 
 {experiments.length > 0 ? <EntryList entries={experiments} /> : (
-  <p class="empty-state">
+  <p class="empty-state experiment-empty">
     {status === 'current'
       ? 'No current experiments to share yet. Work in progress will appear here.'
       : status === 'completed'

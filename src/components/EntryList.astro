@@ -7,10 +7,10 @@ const { entries } = Astro.props;
 
 <ul class="entry-list">
   {entries.map((entry) => (
-    <li>
+    <li class:list={{ 'blog-entry': entry.collection === 'blog' }}>
       <h2><a href={`/${entry.collection}/${entry.id}/`}>{entry.data.title}</a></h2>
       <p class="metadata"><time datetime={entryDate(entry).toISOString()}>{formatDate(entryDate(entry))}</time></p>
-      {entry.collection === 'experiments' && <p class="metadata">{entry.data.status === 'current' ? 'Current' : 'Completed'}</p>}
+      {entry.collection === 'experiments' && <p class="metadata experiment-status">{entry.data.status === 'current' ? 'Current' : 'Completed'}</p>}
       {entry.collection === 'adventures' && <p class="metadata">{entry.data.location}</p>}
       <p>{entry.data.description}</p>
     </li>

@@ -84,6 +84,18 @@
 - [x] Recheck updated captures `ag_img_01.png`, `ag_img_02.png`, `ag_img_04.png`, and `ag_img_14.png`; they now demonstrate their intended examples.
 - [x] Verify the corrected `ag_img_12.png` shows phone-width plain output and long JSON; all sixteen screenshot examples now pass visual review.
 
+## Supporting accent palette
+
+- [x] Keep the near-black background and lime `#C8F04A` homepage highlights, writing numbers, links/arrows, and shared header active/hover/focus states on every page.
+- [x] Use pink `#FF91D2` for blog listing/article links (including footnotes), quote left borders, and quote-card labels; keep quote text neutral. Use purple `#BD93F9` for the active/focused TOC section; keep its icon, label, and inactive links/lines muted gray in both collapsed and expanded views.
+- [x] Retain the supporting blue links outside the homepage/blog, lavender experiment status labels/empty-state borders, and translucent lavender text selection.
+- [x] Preserve content, routes, fonts, the neutral mesh, dependencies, and publishing rules.
+- [x] Run the production build and verify all nine generated pages and preview routes, 50 local links, the article image/alt text, empty states, and the resume redirect.
+- [x] Rebuild after screenshot feedback; verify all nine generated routes, 50 local links, article image/alt text, blog-specific color scopes, TOC markup, empty states, and the resume redirect.
+- [x] Check lime, pink, and purple exceed 4.5:1 text contrast against both the page background and surface; confirm the existing background dev server serves the revised palette at `http://localhost:4323`.
+- [x] Incorporate screenshot feedback and keep the temporary playground and its related guide edits local, outside the palette commit.
+- [ ] Complete dedicated desktop/mobile browser QA; screenshot feedback informed the changes, but no browser surface is available in this session.
+
 ## Later phases
 
 - [ ] Implement full visual identity.
