@@ -87,7 +87,7 @@
 ## Supporting accent palette
 
 - [x] Keep the near-black background and lime `#C8F04A` homepage highlights, writing numbers, links/arrows, and shared header active/hover/focus states on every page.
-- [x] Use pink `#FF91D2` for blog listing/article links (including footnotes), quote left borders, and quote-card labels; keep quote text neutral. Use purple `#BD93F9` for the active/focused TOC section; keep its icon, label, and inactive links/lines muted gray in both collapsed and expanded views.
+- [x] Use pink `#FF91D2` for blog article links (including footnotes), quote left borders, and quote-card labels; keep quote text neutral. Use purple `#BD93F9` for the active/focused TOC section; keep its icon, label, and inactive links/lines muted gray in both collapsed and expanded views.
 - [x] Retain the supporting blue links outside the homepage/blog, lavender experiment status labels/empty-state borders, and translucent lavender text selection.
 - [x] Preserve content, routes, fonts, the neutral mesh, dependencies, and publishing rules.
 - [x] Run the production build and verify all nine generated pages and preview routes, 50 local links, the article image/alt text, empty states, and the resume redirect.
@@ -95,6 +95,34 @@
 - [x] Check lime, pink, and purple exceed 4.5:1 text contrast against both the page background and surface; confirm the existing background dev server serves the revised palette at `http://localhost:4323`.
 - [x] Incorporate screenshot feedback and keep the temporary playground and its related guide edits local, outside the palette commit.
 - [ ] Complete dedicated desktop/mobile browser QA; screenshot feedback informed the changes, but no browser surface is available in this session.
+
+## Shared writing list
+
+- [x] Share the homepage writing rows with blog and experiment listings: lime two-digit numbers, UTC dates above neutral titles, descriptions below, lime right arrows, and full-row links with keyboard focus styling.
+- [x] Keep the existing Blog H1 size and page width; use H2 entry titles on Blog and H3 entry titles beneath Latest writing on the homepage.
+- [x] Share desktop/mobile grid styles, including a flexible title/description column and smaller gaps on narrow screens; keep article and travel layouts unchanged.
+- [x] Apply shared rows to all/current/past experiment listings; retain lavender Current/Completed labels, start dates, status filtering, stable experiment URLs, draft exclusion, and existing empty-state copy.
+- [x] Verify current/completed rows and hidden drafts using temporary entries; remove every validation entry and run the final production build with empty experiments.
+- [x] Run the build; verify all ten local routes, 106 links/anchors, four images/alt texts, numbering, heading levels, date placement, and the live Blog response.
+- [ ] Complete desktop/mobile visual review; no browser surface is available in this session.
+
+## Blog revision history
+
+- [x] Keep index.md/index.mdx as the latest article, with explicit version, revisionDate, and revisionSummary metadata; support colocated index_vN.md/MDX snapshots and shared relative assets.
+- [x] Validate filenames, positive integer versions, unique versions/latest files, one slug/folder/publication date per article, latest-highest numbering, and ordered revision dates, including drafts.
+- [x] Keep canonical article URLs stable; render individual versions at `/blog/<slug>/revisions/<N>/`, with a return-to-latest link on archived pages and latest-only homepage/blog listings.
+- [x] Add the layered revision icon and responsive timeline with the TOC's gray UI typography/icons and purple active marker; position it beside the header/cover above margin notes, with an inline disclosure on phones.
+- [x] Include the shared purple “Why revisions?” link to `/blog/hello-world/#core-principles` below every revision timeline; retain the heading's existing typography and header-aware anchor offset.
+- [x] Add explicit v1 metadata to The First Commit without inventing older versions; demonstrate v1/v2/v3 in a temporary playground, removed after screenshot review.
+- [x] Document the authoring/rotation workflow, drafts, stable URLs, collision rules, and the need to pause the dev watcher before integration builds; preserve project dependencies and integrations.
+- [x] Pass nine revision-validation tests and integration builds covering MD/MDX bodies/assets, draft snapshots/articles, folder renames, version rotation, latest-only listings, and expected failures for collisions/malformed metadata. Remove all disposable validation entries before the final build.
+- [x] Pass full Astro diagnostics with zero errors, warnings, or hints; verify existing responsive note behavior at 390, 767, 768, 1024, 1366, 1440, and 1920px.
+- [x] Verify the final fourteen generated pages, 198 local links/anchors, eight rendered images with alt text, timeline ordering/selection, latest-only listings, empty states, and compatibility redirect; restart the background server on port 4323 and verify the live latest/v1/v2 playground pages.
+- [x] Prepare the temporary TCP/IP screenshot example: v1 explains the stack (March 2024), v2 explores kernel implementation (January 2025), and v3 revisits reliability/flow/congestion (September 2026). Label the copy/dates as illustrative; verify the live preview and rebuilt fourteen pages, 134 links/anchors, and two rendered images.
+- [x] Remove the screenshot playground and its copied assets after user capture; update the author guide to describe preserved examples rather than a live preview route.
+- [x] Pass the final build, revision unit/integration suites, Astro diagnostics, and responsive note checks after removal; verify ten pages, 75 links/anchors, four images with alt text, and no playground or validation routes.
+- [x] Preserve the user's Hello World screenshot reference and include its `img_7.png` asset; leave the unreferenced `img_08.png` local.
+- [ ] Complete desktop/mobile visual review of the revision timeline; no browser surface is available in this session.
 
 ## Later phases
 

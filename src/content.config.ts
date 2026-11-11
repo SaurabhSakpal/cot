@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { blogEntryId, validateBlogVersions, type BlogRevisionEntry } from './lib/blog-revisions';
 
 const text = z.string().trim().min(1);
 const slug = z.string()
@@ -14,14 +15,47 @@ const shared = {
   draft: z.boolean().default(false),
 };
 
-// Astro's glob loader uses frontmatter.slug as entry.id. Requiring it in
-// every schema keeps public URLs independent of numbering and source paths.
+// Latest blog IDs retain the slug; archived snapshots get distinct internal IDs.
+const blogFileIds = new Map<string, string>();
+const blogGlob = glob({
+  base: './src/content/blog',
+  pattern: '**/index*.{md,mdx}',
+  generateId: ({ entry, base, data }) => {
+    const id = blogEntryId(entry, data);
+    const filePath = decodeURIComponent(new URL(`./${entry.split('/').map(encodeURIComponent).join('/')}`, base).pathname)
+      .replace(/^\/([A-Za-z]:\/)/, '$1');
+    // Check source files before glob's digest cache can hide identical duplicates.
+    for (const [file, otherId] of blogFileIds) {
+      if (file !== filePath && otherId === id) {
+        throw new Error(`Duplicate blog entry/version "${id}": ${file} and ${filePath}.`);
+      }
+    }
+    blogFileIds.set(filePath, id);
+    return id;
+  },
+});
+
 const blog = defineCollection({
-  loader: glob({ base: './src/content/blog', pattern: '**/index.{md,mdx}' }),
+  loader: {
+    ...blogGlob,
+    name: 'versioned-blog-glob',
+    async load(context) {
+      blogFileIds.clear();
+      context.watcher?.on('unlink', (file) => blogFileIds.delete(file.replaceAll('\\', '/')));
+      // Reparse on sync so folder moves refresh relative asset/module importer paths.
+      context.store.clear();
+      await blogGlob.load(context);
+      // The glob loader has already parsed these entries through the schema below.
+      validateBlogVersions(context.store.values() as Iterable<BlogRevisionEntry>);
+    },
+  },
   schema: ({ image }) => z.object({
     ...shared,
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
+    version: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    revisionDate: z.coerce.date(),
+    revisionSummary: text,
     tags: z.array(text).default([]),
     cover: z.object({ image: image(), alt: text }).optional(),
   }),

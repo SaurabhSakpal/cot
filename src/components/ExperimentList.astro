@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import EntryList from './EntryList.astro';
+import WritingList from './WritingList.astro';
 import { newestFirst } from '../lib/content';
 
 interface Props { status?: 'current' | 'completed' }
@@ -10,7 +10,7 @@ const experiments = (await getCollection('experiments', ({ data }) =>
 )).sort(newestFirst);
 ---
 
-{experiments.length > 0 ? <EntryList entries={experiments} /> : (
+{experiments.length > 0 ? <WritingList entries={experiments} /> : (
   <p class="empty-state experiment-empty">
     {status === 'current'
       ? 'No current experiments to share yet. Work in progress will appear here.'

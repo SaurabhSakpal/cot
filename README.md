@@ -55,6 +55,9 @@ public/                          # Unprocessed static assets
    description: "A short description of the article."
    pubDate: 2026-11-01
    slug: your-topic
+   version: 1
+   revisionDate: 2026-11-01
+   revisionSummary: "Initial version."
    tags: []
    draft: false
    ---
@@ -76,7 +79,7 @@ public/                          # Unprocessed static assets
 5. Run `npm run build`, inspect the generated page and image, and optionally run `npm run preview` to review production output.
 6. Review `git diff` and `git status`, then stage, commit, and push the intended content yourself. Hosting is deferred; pushing stores source in Git and does not deploy the website.
 
-Required blog metadata: `title`, `description`, `pubDate`, `slug`. Optional: `updatedDate`, `tags`, `draft`, and `cover`. Tags default to `[]`; draft defaults to `false`. Use ISO dates (`YYYY-MM-DD`).
+Required blog metadata: `title`, `description`, `pubDate`, `slug`, `version`, `revisionDate`, and `revisionSummary`. Optional: `updatedDate`, `tags`, `draft`, and `cover`. Tags default to `[]`; draft defaults to `false`. Use ISO dates (`YYYY-MM-DD`).
 
 An optional cover includes a local image and its alt text:
 
@@ -92,6 +95,16 @@ The cover renders above the body. Body images work without a cover. The introduc
 
 See the permanent [Author Guide](AUTHOR_GUIDE.md) for copyable examples of every supported article element, including attributed quote cards, numbered references, wide images, and fenced code blocks. The guide also covers draft previewing and the generated table of contents.
 
+### Saved article versions
+
+Keep `index.md` (or `index.mdx`) as the latest version, with an explicit integer `version` even for the first version. Before revising it, save its complete content and frontmatter as `index_v1.md`, `index_v2.md`, and so on in the same article folder, matching its existing version number. Then increment the latest file's `version`, set `revisionDate`, and describe the change in `revisionSummary`.
+
+All versions share the article's slug and original `pubDate`; titles, descriptions, covers, and body content may evolve. Revision dates must be on/after `pubDate` and follow version order. Keep assets referenced by older snapshots. Version numbers may have gaps but must be unique; `index.md` must have the highest number. For example, latest v3 can coexist with `index_v1.md` and `index_v2.md`, but not `index_v3.md`. MDX snapshots use the same rules.
+
+The article stays at `/blog/your-topic/`. Each saved version also has a stable `/blog/your-topic/revisions/1/` URL, including a numbered URL for the current version. The revision timeline highlights the version being read and offers navigation between versions. Only the latest appears in homepage/blog listings. Archived pages include a link back to the latest.
+
+Duplicate versions, duplicate latest files, filename/version mismatches, orphan snapshots, mixed slugs, and invalid version/date metadata fail the build. These checks include drafts. Run `npm run test:revisions` for validation tests and `npm run test:revisions:build` for route, draft, collision, and asset checks with disposable entries. Stop the dev server with `npm run astro -- dev stop` before the integration builds so its watcher cannot rewrite the shared content cache, then restart it with `npm run dev -- --background` afterward.
+
 ### Shared styling
 
 `src/styles/global.css` owns the shared UI font, colors, layout, article width, and media radius. `src/styles/article.css` defines article typography: Newsreader for titles, Source Serif 4 Regular for body text, and Cormorant Garamond for headings and quotations. Table headers and cells explicitly use Inter at the original compact size and line spacing; navigation, metadata, and captions also use Inter. Code retains its monospace font. All five font families are self-hosted under `public/fonts/` with their SIL Open Font Licenses. Blog/experiment article details live in `ArticleLayout`, `TableOfContents`, and the small `src/scripts/article.ts` enhancement script; no UI framework is required. The shared header links Travel to the existing `/adventures/` routes and About to `/about/`.
@@ -106,13 +119,13 @@ A custom HTML canvas mesh provides the decoration without a graphics library. It
 
 ### Drafts
 
-Set `draft: true` to exclude an entry from every listing and generated article route in both development and production. To preview a draft, temporarily set it to `false` locally, then restore `true` before committing if it should remain unpublished. Drafts still need valid metadata because the loader validates every entry.
+Set `draft: true` to exclude an entry from every listing and generated article route in both development and production. A draft latest blog entry hides its whole article history; a draft snapshot hides only that version from timelines and routes. Keep the latest published file in place until a new iteration is ready. To preview a draft, temporarily set it to `false` locally, then restore `true` before committing if it should remain unpublished. Drafts still need valid metadata because the loader validates every entry.
 
 ### Stable slugs
 
-Every entry requires an explicit, unique slug within its collection: lowercase letters and digits separated by single hyphens, such as `hello-world`. Do not include slashes, `.md`, numbering copied from a folder prefix, or `index`. `current` and `past` are reserved experiment slugs.
+Every article requires an explicit, unique slug within its collection: lowercase letters and digits separated by single hyphens, such as `hello-world`. Saved versions of the same blog article share that slug. Do not include slashes, `.md`, numbering copied from a folder prefix, or `index`. `current` and `past` are reserved experiment slugs.
 
-The glob loader uses frontmatter `slug` as the entry's `id`; all links and generated route parameters use that `id`. Directory names and nesting never form the public URL. Keep a published slug unchanged when renaming or moving source files. Duplicate slugs fail the build. A deliberate future slug change will need a URL migration.
+The glob loader uses frontmatter `slug` as the latest entry's `id`; archived blog snapshots have internal `<slug>/v<N>` IDs. Public revision URLs use the latest entry's ID plus its version number. Directory names and nesting never form the public URL. Keep a published slug unchanged when renaming or moving source files. Slugs reused across different articles fail the build. A deliberate future slug change will need a URL migration.
 
 ## Experiments
 

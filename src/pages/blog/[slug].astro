@@ -1,15 +1,15 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getPublishedBlogHistories, type PublishedBlogHistory } from '../../lib/blog';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 export const getStaticPaths = (async () => {
-  const entries = await getCollection('blog', ({ data }) => !data.draft);
-  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  const histories = await getPublishedBlogHistories();
+  return histories.map((history) => ({ params: { slug: history.latest.id }, props: { history } }));
 }) satisfies GetStaticPaths;
 
-interface Props { entry: CollectionEntry<'blog'> }
-const { entry } = Astro.props;
+interface Props { history: PublishedBlogHistory }
+const { history } = Astro.props;
 ---
 
-<ArticleLayout entry={entry} />
+<ArticleLayout entry={history.latest} history={history} />

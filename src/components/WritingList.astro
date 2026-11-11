@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { entryDate, formatDate } from '../lib/content';
+import '../styles/writing-list.css';
+
+interface Props {
+  entries: CollectionEntry<'blog' | 'experiments'>[];
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { entries, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+---
+
+<ol class="writing-list">
+  {entries.map((entry, index) => (
+    <li>
+      <a href={`/${entry.collection}/${entry.id}/`}>
+        <span class="writing-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <div>
+          <time datetime={entryDate(entry).toISOString()}>{formatDate(entryDate(entry))}</time>
+          <Heading>{entry.data.title}</Heading>
+          {entry.collection === 'experiments' && (
+            <p class="metadata experiment-status">{entry.data.status === 'current' ? 'Current' : 'Completed'}</p>
+          )}
+          <p>{entry.data.description}</p>
+        </div>
+        <span class="writing-arrow" aria-hidden="true">↗</span>
+      </a>
+    </li>
+  ))}
+</ol>

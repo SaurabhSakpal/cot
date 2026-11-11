@@ -1,10 +1,10 @@
 # Writing for Chain of Thoughts
 
-Use this guide as a copy-and-paste reference while writing. The source examples and screenshots are preserved from the temporary Article Playground, which was removed from the blog after the screenshots were completed. The examples below retain the same words, code, and captions shown in the images. Ordinary Markdown (`index.md`) supports everything below; use `index.mdx` only when you need imported components. Fonts, colors, and spacing come from the shared article styles.
+Use this guide as a copy-and-paste reference while writing. The source examples and screenshots are preserved from the temporary Article Playground, removed after design review. The examples below retain the same words, code, and captions shown in the images; screenshots show the earlier palette, while new articles use the current shared styles. Ordinary Markdown (`index.md`) supports everything below; use `index.mdx` only when you need imported components. Fonts, colors, and spacing come from the shared article styles.
 
 Each example pairs source code with a screenshot of its output. All sixteen screenshot files are present in **`docs/images/author-guide/`**, relative to the repository root, and all embedded screenshot links resolve. All screenshots have passed visual review against their examples. These documentation images are separate from the images inside a blog article. The [capture checklist](#screenshot-capture-checklist) lists every filename and what to include.
 
-The playground is no longer a blog entry or a preview route. Its `draft: false` metadata below is preserved only as an example; start your own unpublished articles with `draft: true`.
+The playground is no longer a blog entry or a preview route. Its metadata below is preserved as an authoring example; start your own unpublished articles with `draft: true`.
 
 ## Start a post
 
@@ -27,6 +27,9 @@ description: "A temporary showcase of every supported article element, from quie
 pubDate: 2026-11-10
 updatedDate: 2026-11-10
 slug: article-playground
+version: 3
+revisionDate: 2026-11-10
+revisionSummary: "Full examples with images, code, tables, and margin notes."
 tags:
   - temporary
   - authoring
@@ -45,13 +48,32 @@ cover:
 
 When starting your own post, replace the title, description, dates, tags, cover, and slug, and begin with `draft: true`. Keep your chosen image files beside your own entry.
 
-- `title`, `description`, `pubDate`, and `slug` are required.
+- `title`, `description`, `pubDate`, `slug`, `version`, `revisionDate`, and `revisionSummary` are required.
 - The layout supplies the title, description, dates, and tags. Do not repeat the title as a `#` heading in the body.
 - `slug` determines the public URL: for example, `slug: your-article` produces `/blog/your-article/`. Use a unique slug with lowercase letters/numbers separated by single hyphens. Do not use `index`, spaces, slashes, or a file extension.
 - Keep a published slug unchanged when renaming or moving the source folder.
 - Use `YYYY-MM-DD` dates. Dates are displayed in UTC.
 - Optional `updatedDate` adds an updated date. Tags default to an empty list.
 - **Drafts are excluded from both local preview routes and production routes.** Temporarily set `draft: false` while previewing locally. Restore `true` before committing if the article is not ready to publish.
+
+## Save an article revision
+
+Keep the latest article in `index.md` or `index.mdx`, with an explicit positive integer `version`. To publish the next iteration:
+
+1. Copy the current file to `index_vN.md` (or `.mdx`), where N is its current `version`. Preserve that snapshot's body and metadata.
+2. Edit `index.md`, increment its `version`, set `revisionDate`, and write a short `revisionSummary` describing what changed. Update `updatedDate` when applicable.
+3. Keep the same `slug` and original `pubDate` in every version. Keep shared image files that older snapshots still reference.
+4. Build and review the latest page and the older version through its timeline.
+
+For example, an article with latest `index.md` at `version: 3` can keep `index_v2.md` and `index_v1.md` beside it. With `slug: your-topic`, its main URL remains `/blog/your-topic/` and its individual versions are `/blog/your-topic/revisions/1/`, `/blog/your-topic/revisions/2/`, and `/blog/your-topic/revisions/3/`. Selecting a version loads its own body, headings, metadata, and notes. The timeline's purple marker follows the version being read. Revision summaries should explain meaningful changes in understanding, rather than just formatting or added media.
+
+The latest file must have the highest version number, and snapshot suffixes must match their frontmatter numbers. Version collisions, duplicate MD/MDX latest files, conflicting slugs/folders, snapshots without a latest file, and inconsistent publication/revision dates fail the build. Version gaps are allowed. Revision dates must be on/after publication and follow version order; same-day iterations are allowed.
+
+Draft snapshots are excluded from timelines and routes. If `index.md` is a draft, the entire article and its saved versions are unpublished. Homepage/blog listings show each published article once, using its latest entry. Archived pages have a link back to the latest.
+
+The timeline uses the same gray labels/icons and purple active-item color as the contents. On tablets and desktops it appears beside the title and cover, above the right-margin notes. On phones it becomes an inline disclosure. The numbered URL for the latest version remains available when that version later becomes a snapshot.
+
+Every timeline ends with a purple “Why revisions?” link to [Core Principles in The First Commit](/blog/hello-world/#core-principles). Article headings already have generated IDs, so a section link uses `/blog/<slug>/#<heading-id>` without turning the heading into a styled link. Copy the target from the table of contents when a heading contains punctuation or repeated words; section jumps respect the persistent header offset.
 
 ## Headings and the table of contents
 

@@ -1,11 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedBlogEntries } from '../lib/blog';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ThoughtMesh from '../components/ThoughtMesh.astro';
-import { newestFirst, formatDate } from '../lib/content';
+import WritingList from '../components/WritingList.astro';
+import { newestFirst } from '../lib/content';
 import '../styles/home.css';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(newestFirst).slice(0, 3);
+const posts = (await getPublishedBlogEntries()).sort(newestFirst).slice(0, 3);
 ---
 
 <BaseLayout landing title="Chain of Thoughts" description="Saurabh’s personal blog about software engineering, experiments, and the connections between ideas.">
@@ -32,18 +33,6 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(newe
       <h2 id="writing-title">Latest writing</h2>
       <a href="/blog/">All articles <span aria-hidden="true">↗</span></a>
     </div>
-    {posts.length ? <ol class="writing-list">
-      {posts.map((post, index) => <li>
-        <a href={`/blog/${post.id}/`}>
-          <span class="writing-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-          <div>
-            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-            <h3>{post.data.title}</h3>
-            <p>{post.data.description}</p>
-          </div>
-          <span class="writing-arrow" aria-hidden="true">↗</span>
-        </a>
-      </li>)}
-    </ol> : <p class="writing-empty">New thoughts will appear here.</p>}
+    {posts.length ? <WritingList entries={posts} headingLevel="h3" /> : <p class="writing-empty">New thoughts will appear here.</p>}
   </section>
 </BaseLayout>

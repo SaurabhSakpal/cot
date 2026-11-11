@@ -3,6 +3,9 @@ title: "The First Commit"
 description: "Thoughts, Experiments and everything in between."
 pubDate: 2026-11-01
 slug: hello-world
+version: 1
+revisionDate: 2026-11-10
+revisionSummary: "Starting point for this article's saved revision history."
 cover:
   image: ./images/image_2.png
   alt: "First computer program ever"
@@ -43,7 +46,7 @@ I want my whole blog to anchor on following two principles:
 So my articles aren't necessarily conclusions. They're snapshots of my understanding at a particular point in time.
 
 Each article will have a start date and may go through one or more revisions as my understanding evolves. You'll be able to explore previous revisions using the revision history alongside each article.
-
+![Image showing an example of revisions of a imaginary blog post](./images/img_7.png)
 Even this article, which explains why I'm writing today, might evolve as my motivations change over time.
 
 I don't really know what this blog will look like a few years from now. Maybe I'll be writing about entirely different things, or maybe I'll still be exploring the same topics with a better understanding. Either way, I think it'll be interesting to look back and see how things have changed.

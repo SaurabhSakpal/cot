@@ -1,0 +1,19 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import ArticleLayout from '../../../../layouts/ArticleLayout.astro';
+import { getPublishedBlogHistories, type PublishedBlogHistory } from '../../../../lib/blog';
+
+export const getStaticPaths = (async () => {
+  const histories = await getPublishedBlogHistories();
+  return histories.flatMap((history) => history.versions.map((entry) => ({
+    params: { slug: history.latest.id, version: String(entry.data.version) },
+    props: { entry, history },
+  })));
+}) satisfies GetStaticPaths;
+
+interface Props { entry: CollectionEntry<'blog'>; history: PublishedBlogHistory }
+const { entry, history } = Astro.props;
+---
+
+<ArticleLayout entry={entry} history={history} />

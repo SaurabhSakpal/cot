@@ -1,0 +1,30 @@
+.revisions-rail { min-width: 0; margin: 0 0 2rem; }
+.revisions { --link: var(--toc-accent); --link-hover: var(--toc-accent); --link-underline: var(--toc-accent); font-family: var(--font-body); color: var(--muted); font-size: 0.8rem; line-height: 1.6; border-bottom: 1px solid var(--border); }
+.revisions summary { padding: 0.75rem 0; font-size: 0.9rem; }
+.revisions-icon { display: inline-block; vertical-align: -0.15em; margin-right: 0.4rem; }
+.revisions-intro { margin: 0 0 1.5rem; font-size: 0.75rem; }
+.revisions-philosophy { margin: 1.25rem 0 1rem; font-size: 0.75rem; }
+.revisions ol { list-style: none; padding: 0 0 0 0.3rem; margin: 0 0 1rem; }
+.revision-item { position: relative; padding: 0 0 1.5rem 1.25rem; margin: 0; border-left: 1px solid var(--border); }
+.revision-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+.revision-item::before { content: ''; position: absolute; left: -0.25rem; top: 0.45rem; width: 0.4375rem; height: 0.4375rem; border-radius: 50%; background: var(--muted); box-shadow: 0 0 0 3px var(--background); }
+.revision-item.is-current::before { background: var(--toc-accent); }
+.revision-item.is-current:not(:last-child) { border-left-color: var(--toc-accent); }
+.revision-item a { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem; width: fit-content; color: var(--muted); text-decoration: none; }
+.revision-item a:hover { color: var(--heading); }
+.revision-item a[aria-current="page"], .revision-item a:focus-visible { color: var(--toc-accent); }
+.revision-label { font-weight: 600; }
+.revision-latest { font-size: 0.65rem; font-weight: 400; }
+.revision-date { display: block; margin: 0.15rem 0 0.35rem; font-size: 0.7rem; }
+.revision-summary { margin: 0; font-size: 0.75rem; overflow-wrap: anywhere; }
+.revision-notice { margin: 0 0 1.5rem; padding: 0.75rem 1rem; border-left: 2px solid var(--toc-accent); background: var(--surface); color: var(--muted); font-family: var(--font-body); font-size: 0.8rem; line-height: 1.7; }
+
+@media (min-width: 48rem) {
+  .reading-layout > .revisions-rail { grid-column: 2; grid-row: 1 / 3; align-self: stretch; }
+  .revisions { position: sticky; top: var(--sticky-top); max-height: calc(100dvh - var(--sticky-top) - 1.5rem); overflow-y: auto; border: 0; padding-inline: 0.35rem; }
+  .revisions summary { list-style: none; }
+}
+
+@media (min-width: 90rem) {
+  .reading-layout > .revisions-rail { grid-column: 3; }
+}

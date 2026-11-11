@@ -1,0 +1,36 @@
+---
+import type { PublishedBlogHistory } from '../lib/blog';
+import { revisionUrl } from '../lib/blog-revisions';
+import '../styles/revisions.css';
+
+interface Props { history: PublishedBlogHistory; currentVersion: number }
+const { history, currentVersion } = Astro.props;
+const dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+
+<aside class="revisions-rail">
+  <details class="revisions" open>
+    <summary>
+      <svg class="revisions-icon" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="m8 1.5 6 3-6 3-6-3 6-3Zm-6 6 6 3 6-3M2 10.5l6 3 6-3" />
+      </svg>
+      <span>Revisions</span>
+    </summary>
+    <p class="revisions-intro">How this article has evolved.</p>
+    <nav aria-label="Article revisions">
+      <ol>
+        {history.versions.map((revision) => (
+          <li class:list={['revision-item', { 'is-current': revision.data.version === currentVersion }]}>
+            <a href={revisionUrl(history.latest.id, revision.data.version)} aria-current={revision.data.version === currentVersion ? 'page' : undefined}>
+              <span class="revision-label">v{revision.data.version}</span>
+              {revision.data.version === history.latest.data.version && <span class="revision-latest">Latest</span>}
+            </a>
+            <time class="revision-date" datetime={revision.data.revisionDate.toISOString()}>{dateFormat.format(revision.data.revisionDate)}</time>
+            <p class="revision-summary">{revision.data.revisionSummary}</p>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <p class="revisions-philosophy"><a href="/blog/hello-world/#core-principles">Why revisions?</a></p>
+  </details>
+</aside>
